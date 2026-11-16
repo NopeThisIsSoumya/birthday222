@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Bon ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="backgroundEffects"></div>
+
+    <!-- =========================================
+         1. SOFT HEART INTRO
+    ========================================== -->
+    <section id="birthdayIntro" class="page active">
+        <div class="intro-card">
+            <p class="intro-small">a little something for you</p>
+
+            <div class="intro-heart-wrap">
+                <div class="intro-heart">♥</div>
+                <div class="heart-halo"></div>
+            </div>
+
+            <div id="introPetals"></div>
+
+            <p class="intro-hint">tap the heart or wait for the surprise</p>
+        </div>
+    </section>
+
+    <!-- =========================================
+         2. IMPROVED HEART TREE
+    ========================================== -->
+    <section id="treeIntro" class="page">
+        <div class="tree-scene">
+
+            <div class="tree-stars" id="treeStars"></div>
+
+            <div class="tree-wrap">
+                <svg class="tree-svg" viewBox="0 0 700 720"
+                     aria-label="Heart tree animation">
+                    <defs>
+                        <linearGradient id="trunkGradient" x1="0" x2="1">
+                            <stop offset="0" stop-color="#2b120d"/>
+                            <stop offset="0.48" stop-color="#7a3b27"/>
+                            <stop offset="1" stop-color="#32140f"/>
+                        </linearGradient>
+
+                        <filter id="treeGlow">
+                            <feGaussianBlur stdDeviation="5" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+
+                    <!-- Ground glow -->
+                    <ellipse class="ground-glow"
+                             cx="350" cy="675" rx="190" ry="22"/>
+
+                    <!-- Natural trunk -->
+                    <path class="tree-trunk-svg"
+                          d="M350 670
+                             C348 590 351 515 350 445
+                             C349 375 350 300 353 220"
+                          fill="none"/>
+
+                    <!-- Main branches -->
+                    <path class="tree-branch-svg branch-a"
+                          d="M351 455 C310 395 260 335 205 270 C180 240 162 210 145 175"/>
+                    <path class="tree-branch-svg branch-b"
+                          d="M350 405 C390 355 440 305 500 255 C530 230 548 195 562 160"/>
+                    <path class="tree-branch-svg branch-c"
+                          d="M350 330 C305 295 265 255 230 205 C212 180 200 155 194 125"/>
+                    <path class="tree-branch-svg branch-d"
+                          d="M352 305 C400 265 440 220 475 170 C495 142 507 115 514 88"/>
+                    <path class="tree-branch-svg branch-e"
+                          d="M350 255 C375 215 392 178 405 135 C413 110 420 90 431 70"/>
+                    <path class="tree-branch-svg branch-f"
+                          d="M351 390 C300 365 250 350 190 342 C160 338 130 325 105 308"/>
+                    <path class="tree-branch-svg branch-g"
+                          d="M352 420 C405 395 460 375 520 370 C550 367 580 355 606 338"/>
+
+                    <!-- Fine twigs -->
+                    <g class="fine-twigs">
+                        <path d="M205 270 C175 245 150 230 126 215"/>
+                        <path d="M205 270 C195 235 192 205 190 175"/>
+                        <path d="M500 255 C530 230 558 220 586 205"/>
+                        <path d="M500 255 C510 225 515 195 518 168"/>
+                        <path d="M230 205 C210 180 185 165 160 155"/>
+                        <path d="M230 205 C235 175 240 150 245 125"/>
+                        <path d="M475 170 C500 150 522 130 545 108"/>
+                        <path d="M475 170 C470 140 470 115 475 92"/>
+                        <path d="M405 135 C390 110 375 92 360 75"/>
+                        <path d="M405 135 C420 110 440 92 458 78"/>
+                        <path d="M190 342 C155 345 125 340 95 330"/>
+                        <path d="M520 370 C550 385 580 392 610 395"/>
+                    </g>
+                </svg>
+
+                <div id="heartTree" class="heart-canopy"></div>
+                <div id="branchHearts" class="branch-hearts"></div>
+            </div>
+
+            <div class="tree-caption">
+                <p>A little surprise for you...</p>
+                <span>♥</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         3. BIRTHDAY HOME
+    ========================================== -->
+    <section id="home" class="page">
+        <div class="home-content">
+            <div class="small-title">✦ A SPECIAL DAY FOR A SPECIAL PERSON ✦</div>
+            <div class="home-heart">❤️</div>
+
+            <h1>Happy Birthday <span>Bon</span></h1>
+            <p class="subtitle">Today is all about you ❤️</p>
+
+            <button class="main-button" onclick="startBirthday()">
+                🎁 Open Your Surprise
+            </button>
+        </div>
+    </section>
+
+    <!-- =========================================
+         4. MESSAGE
+    ========================================== -->
+    <section id="message" class="page">
+        <div class="message-box">
+            <div class="cake">🎂</div>
+
+            <h2>Happy Birthday Bon ❤️</h2>
+
+            <p>
+                Today is a beautiful day because
+                it celebrates someone very special.
+            </p>
+
+            <p>
+                May your life always be filled with
+                happiness, laughter, success and
+                beautiful memories.
+            </p>
+
+            <button class="main-button" onclick="showMemories()">
+                📸 See Your Memories
+            </button>
+        </div>
+    </section>
+
+    <!-- =========================================
+         5. MEMORIES
+    ========================================== -->
+    <section id="memories" class="page">
+        <div class="memory-wrapper">
+            <div class="memory-title">✦ A LITTLE MEMORY ✦</div>
+
+            <div class="photo-area">
+                <button class="arrow" onclick="previousPhoto()">❮</button>
+
+                <div class="photo-card">
+                    <div class="photo-glow"></div>
+
+                    <img id="memoryPhoto"
+                         src="photo1.jpg"
+                         alt="Birthday Memory">
+                </div>
+
+                <button class="arrow" onclick="nextPhoto()">❯</button>
+            </div>
+
+            <div id="photoCounter">1 / 5</div>
+
+            <p id="photoMessage">
+                A beautiful memory to remember forever ❤️
+            </p>
+
+            <div id="dots"></div>
+
+            <button class="small-button" onclick="showFinal()">
+                💖 One More Surprise
+            </button>
+        </div>
+    </section>
+
+    <!-- =========================================
+         6. FINAL
+    ========================================== -->
+    <section id="final" class="page">
+        <div class="final-content">
+            <div class="final-floating-hearts">
+                ❤️ &nbsp; 💕 &nbsp; ❤️
+            </div>
+
+            <div class="big-heart">❤️</div>
+
+            <h1>Happy Birthday <span>Bon</span></h1>
+
+            <p>
+                May every new year of your life
+                bring you more happiness,
+                success and wonderful memories.
+            </p>
+
+            <div class="final-message">
+                🎂 Have an amazing birthday! 🎉
+            </div>
+
+            <div class="signature">
+                With lots of love ❤️
+            </div>
+        </div>
+    </section>
+
+    <!-- MUSIC -->
+    <audio id="birthdayMusic" loop>
+        <source src="birthday.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="musicButton"
+            class="music-button"
+            onclick="toggleMusic()">
+        🔇 Music
+    </button>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
