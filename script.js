@@ -1,4 +1,3 @@
-
 /* ==========================================
    PHOTO DATA
 ========================================== */
@@ -63,13 +62,25 @@ function createIntroPetals() {
 
         petal.className = "intro-petal";
 
-        const symbols = ["♥", "♡", "✦", "•"];
+        const symbols = [
+            "♥",
+            "♡",
+            "✦",
+            "•"
+        ];
 
         petal.innerHTML =
-            symbols[Math.floor(Math.random() * symbols.length)];
+            symbols[
+                Math.floor(
+                    Math.random() * symbols.length
+                )
+            ];
 
-        petal.style.left = (10 + Math.random() * 80) + "%";
-        petal.style.top = (8 + Math.random() * 78) + "%";
+        petal.style.left =
+            (10 + Math.random() * 80) + "%";
+
+        petal.style.top =
+            (8 + Math.random() * 78) + "%";
 
         petal.style.fontSize =
             (7 + Math.random() * 15) + "px";
@@ -88,47 +99,45 @@ createIntroPetals();
 
 
 /* ==========================================
-   BEAUTIFUL HEART-SHAPED TREE CANOPY
+   IMPROVED HEART TREE
 ========================================== */
 
 function createHeartTree() {
 
     heartTree.innerHTML = "";
 
-    // More hearts for a fuller tree
+    /*
+       Fewer hearts on mobile so the tree
+       doesn't become messy.
+    */
 
     const totalHearts =
-        window.innerWidth <= 600 ? 170 : 280;
+        window.innerWidth <= 600
+            ? 110
+            : 180;
 
-    // Beautiful pink colour collection
 
-    const colors = [
-        "#ff1744",
-        "#ff2e75",
-        "#ff3d83",
-        "#ff5798",
-        "#ff6fa7",
-        "#ff85b5",
-        "#ff9fc5",
-        "#ffc0d8",
-        "#ffd6e5"
-    ];
+    /*
+       Create hearts inside a mathematical
+       heart-shaped area.
+    */
 
     for (let i = 0; i < totalHearts; i++) {
 
-        const heart = document.createElement("span");
+        const heart =
+            document.createElement("span");
 
         heart.className = "tree-heart";
+
         heart.innerHTML = "♥";
 
-        let x, y;
-        let attempts = 0;
+
+        let x;
+        let y;
+
 
         /*
-           Mathematical heart shape.
-
-           This creates a proper heart-shaped
-           canopy instead of a random circle.
+           Heart equation
         */
 
         do {
@@ -136,81 +145,87 @@ function createHeartTree() {
             x = Math.random() * 2 - 1;
             y = Math.random() * 2 - 1;
 
-            attempts++;
-
         } while (
-            Math.pow(x * x + y * y - 1, 3)
-            - x * x * y * y * y > 0 &&
-            attempts < 1000
+            Math.pow(
+                x * x +
+                y * y -
+                1,
+                3
+            )
+            -
+            x * x *
+            y * y *
+            y > 0
         );
 
-        /*
-           Position hearts inside the canopy.
-           The canopy is wider in the middle
-           and narrower at the bottom.
-        */
-
-        const screenX = 50 + x * 31;
-        const screenY = 30 - y * 24;
-
-        heart.style.left = screenX + "%";
-        heart.style.top = screenY + "%";
 
         /*
-           Different sizes create depth.
+           Position the hearts.
         */
 
-        const size = 7 + Math.random() * 12;
+        const screenX =
+            50 + x * 29;
 
-        heart.style.fontSize = size + "px";
+        const screenY =
+            27 - y * 22;
+
+
+        heart.style.left =
+            screenX + "%";
+
+        heart.style.top =
+            screenY + "%";
+
 
         /*
-           Random pink shades.
+           Random heart size.
         */
+
+        const size =
+            8 + Math.random() * 13;
+
+        heart.style.fontSize =
+            size + "px";
+
+
+        /*
+           Different pink shades.
+        */
+
+        const colors = [
+            "#ff3d83",
+            "#ff5798",
+            "#ff6fa7",
+            "#ff8db9",
+            "#ffc0d8"
+        ];
 
         heart.style.color =
-            colors[Math.floor(Math.random() * colors.length)];
+            colors[
+                Math.floor(
+                    Math.random() *
+                    colors.length
+                )
+            ];
+
 
         /*
-           Different opacity creates
-           a natural layered appearance.
-        */
-
-        heart.style.opacity =
-            (0.65 + Math.random() * 0.35).toFixed(2);
-
-        /*
-           Slight rotation makes the
-           arrangement look more natural.
-        */
-
-        const rotation = Math.random() * 50 - 25;
-
-        heart.style.transform =
-            `rotate(${rotation}deg)`;
-
-        /*
-           Hearts appear gradually.
+           Hearts appear one after another.
         */
 
         heart.style.animationDelay =
-            (i * 0.018) + "s";
+            (i * 0.025) + "s";
+
 
         /*
-           Small movement.
+           Very small movement.
         */
 
         heart.style.setProperty(
             "--drift",
-            ((Math.random() - 0.5) * 7) + "px"
+            ((Math.random() - 0.5) * 5) + "px"
         );
 
-        /*
-           Different layers.
-        */
-
-        heart.style.zIndex =
-            Math.floor(screenY);
 
         heartTree.appendChild(heart);
     }
@@ -218,57 +233,71 @@ function createHeartTree() {
 
 
 /* ==========================================
-   HEARTS ON TREE BRANCHES
+   HEARTS ON BRANCH TIPS
 ========================================== */
 
 function createBranchHearts() {
 
     branchHearts.innerHTML = "";
 
+
+    /*
+       Carefully selected positions
+       for the tree branches.
+    */
+
     const positions = [
 
-        // Left branches
         [21, 22, 20],
         [29, 31, 16],
         [20, 44, 14],
-        [35, 36, 15],
 
-        // Upper branches
         [37, 22, 13],
-        [45, 17, 15],
+        [45, 17, 12],
         [47, 32, 15],
-        [51, 12, 13],
 
-        // Right branches
         [68, 20, 20],
         [61, 31, 15],
-        [72, 41, 15],
-        [77, 32, 13],
+        [72, 41, 13],
 
-        // Inner branches
         [54, 24, 14],
         [30, 46, 12],
-        [76, 46, 12],
-        [43, 42, 13]
+        [76, 46, 11]
 
     ];
 
-    positions.forEach(function (p, index) {
 
-        const heart = document.createElement("span");
+    positions.forEach(
+        function (p, index) {
 
-        heart.className = "branch-heart";
-        heart.innerHTML = "♥";
+            const heart =
+                document.createElement("span");
 
-        heart.style.left = p[0] + "%";
-        heart.style.top = p[1] + "%";
-        heart.style.fontSize = p[2] + "px";
+            heart.className =
+                "branch-heart";
 
-        heart.style.animationDelay =
-            (2 + index * 0.12) + "s";
+            heart.innerHTML = "♥";
 
-        branchHearts.appendChild(heart);
-    });
+
+            heart.style.left =
+                p[0] + "%";
+
+            heart.style.top =
+                p[1] + "%";
+
+            heart.style.fontSize =
+                p[2] + "px";
+
+
+            heart.style.animationDelay =
+                (2.2 + index * 0.15) + "s";
+
+
+            branchHearts.appendChild(
+                heart
+            );
+        }
+    );
 }
 
 
@@ -280,21 +309,28 @@ function createTreeStars() {
 
     treeStars.innerHTML = "";
 
-    for (let i = 0; i < 30; i++) {
 
-        const star = document.createElement("span");
+    for (let i = 0; i < 22; i++) {
+
+        const star =
+            document.createElement("span");
 
         star.innerHTML = "✦";
-        star.className = "tree-star";
 
-        star.style.left = Math.random() * 100 + "%";
-        star.style.top = Math.random() * 75 + "%";
+        star.className =
+            "tree-star";
+
+
+        star.style.left =
+            Math.random() * 100 + "%";
+
+        star.style.top =
+            Math.random() * 75 + "%";
+
 
         star.style.animationDelay =
             Math.random() * 3 + "s";
 
-        star.style.fontSize =
-            (7 + Math.random() * 12) + "px";
 
         treeStars.appendChild(star);
     }
@@ -311,19 +347,29 @@ function tryStartMusic() {
         return;
     }
 
+
     music.play()
 
         .then(function () {
 
             musicStarted = true;
 
-            musicButton.innerHTML = "🔊 Music";
+            musicButton.innerHTML =
+                "🔊 Music";
 
         })
 
         .catch(function () {
 
-            musicButton.innerHTML = "🔇 Music";
+            /*
+               Phone browsers can block
+               automatic music.
+
+               User can press the Music button.
+            */
+
+            musicButton.innerHTML =
+                "🔇 Music";
         });
 }
 
@@ -336,7 +382,8 @@ function toggleMusic() {
 
             .then(function () {
 
-                musicButton.innerHTML = "🔊 Music";
+                musicButton.innerHTML =
+                    "🔊 Music";
 
                 musicStarted = true;
 
@@ -344,14 +391,16 @@ function toggleMusic() {
 
             .catch(function () {
 
-                musicButton.innerHTML = "🔇 Music";
+                musicButton.innerHTML =
+                    "🔇 Music";
             });
 
     } else {
 
         music.pause();
 
-        musicButton.innerHTML = "🔇 Music";
+        musicButton.innerHTML =
+            "🔇 Music";
     }
 }
 
@@ -362,34 +411,75 @@ function toggleMusic() {
 
 function startTree() {
 
-    if (!intro.classList.contains("active")) {
+    /*
+       Don't start twice.
+    */
+
+    if (
+        !intro.classList.contains("active")
+    ) {
         return;
     }
 
+
+    /*
+       Hide intro.
+    */
+
     intro.classList.remove("active");
+
+
+    /*
+       Show tree.
+    */
 
     treeIntro.classList.add("active");
 
+
+    /*
+       Create tree elements.
+    */
+
     createHeartTree();
+
     createBranchHearts();
+
     createTreeStars();
+
+
+    /*
+       Try to start music.
+    */
 
     tryStartMusic();
 
-    setTimeout(function () {
 
-        treeIntro.classList.add("tree-ready");
+    /*
+       Start tree animation.
+    */
 
-    }, 100);
+    setTimeout(
+        function () {
+
+            treeIntro.classList.add(
+                "tree-ready"
+            );
+
+        },
+        100
+    );
 }
 
 
 /*
-   Automatically show the tree
-   after 5.8 seconds.
+   Intro automatically changes
+   to tree after 5.8 seconds.
 */
 
-setTimeout(startTree, 5800);
+setTimeout(
+    startTree,
+    5800
+);
 
 
 /*
@@ -398,11 +488,17 @@ setTimeout(startTree, 5800);
 */
 
 const introHeart =
-    document.querySelector(".intro-heart-wrap");
+    document.querySelector(
+        ".intro-heart-wrap"
+    );
+
 
 if (introHeart) {
 
-    introHeart.addEventListener("click", startTree);
+    introHeart.addEventListener(
+        "click",
+        startTree
+    );
 }
 
 
@@ -410,15 +506,28 @@ if (introHeart) {
    TREE → HOME
 ========================================== */
 
-setTimeout(function () {
+setTimeout(
+    function () {
 
-    treeIntro.classList.remove("active");
+        treeIntro.classList.remove(
+            "active"
+        );
 
-    home.classList.add("active");
+        home.classList.add(
+            "active"
+        );
 
-    startCelebration();
 
-}, 12500);
+        /*
+           Start balloons,
+           hearts and sparkles.
+        */
+
+        startCelebration();
+
+    },
+    12500
+);
 
 
 /* ==========================================
@@ -427,9 +536,14 @@ setTimeout(function () {
 
 function startBirthday() {
 
-    home.classList.remove("active");
+    home.classList.remove(
+        "active"
+    );
 
-    message.classList.add("active");
+    message.classList.add(
+        "active"
+    );
+
 
     tryStartMusic();
 
@@ -443,9 +557,14 @@ function startBirthday() {
 
 function showMemories() {
 
-    message.classList.remove("active");
+    message.classList.remove(
+        "active"
+    );
 
-    memories.classList.add("active");
+    memories.classList.add(
+        "active"
+    );
+
 
     createDots();
 }
@@ -457,9 +576,14 @@ function showMemories() {
 
 function showFinal() {
 
-    memories.classList.remove("active");
+    memories.classList.remove(
+        "active"
+    );
 
-    final.classList.add("active");
+    final.classList.add(
+        "active"
+    );
+
 
     startCelebration();
 }
@@ -473,9 +597,14 @@ function nextPhoto() {
 
     currentPhoto++;
 
-    if (currentPhoto >= photos.length) {
+
+    if (
+        currentPhoto >= photos.length
+    ) {
+
         currentPhoto = 0;
     }
+
 
     changePhoto();
 }
@@ -489,9 +618,13 @@ function previousPhoto() {
 
     currentPhoto--;
 
+
     if (currentPhoto < 0) {
-        currentPhoto = photos.length - 1;
+
+        currentPhoto =
+            photos.length - 1;
     }
+
 
     changePhoto();
 }
@@ -504,37 +637,63 @@ function previousPhoto() {
 function changePhoto() {
 
     const image =
-        document.getElementById("memoryPhoto");
+        document.getElementById(
+            "memoryPhoto"
+        );
 
     const photoMessage =
-        document.getElementById("photoMessage");
+        document.getElementById(
+            "photoMessage"
+        );
 
     const counter =
-        document.getElementById("photoCounter");
+        document.getElementById(
+            "photoCounter"
+        );
 
-    // Restart photo animation
+
+    /*
+       Restart photo animation.
+    */
 
     image.style.animation = "none";
 
     void image.offsetWidth;
 
-    // Change image
 
-    image.src = photos[currentPhoto].image;
+    /*
+       Change image.
+    */
 
-    // Change message
+    image.src =
+        photos[currentPhoto].image;
+
+
+    /*
+       Change message.
+    */
 
     photoMessage.innerHTML =
         photos[currentPhoto].message;
 
-    // Change counter
+
+    /*
+       Change counter.
+    */
 
     counter.innerHTML =
-        (currentPhoto + 1) + " / " + photos.length;
+        (currentPhoto + 1)
+        + " / "
+        + photos.length;
 
-    // Play animation
 
-    image.style.animation = "photoAppear 0.7s ease";
+    /*
+       Play animation.
+    */
+
+    image.style.animation =
+        "photoAppear 0.7s ease";
+
 
     updateDots();
 }
@@ -546,28 +705,54 @@ function changePhoto() {
 
 function createDots() {
 
-    const dots = document.getElementById("dots");
+    const dots =
+        document.getElementById(
+            "dots"
+        );
+
 
     dots.innerHTML = "";
 
-    for (let i = 0; i < photos.length; i++) {
 
-        const dot = document.createElement("div");
+    for (
+        let i = 0;
+        i < photos.length;
+        i++
+    ) {
 
-        dot.classList.add("dot");
+        const dot =
+            document.createElement(
+                "div"
+            );
 
-        if (i === currentPhoto) {
-            dot.classList.add("active");
+
+        dot.classList.add(
+            "dot"
+        );
+
+
+        if (
+            i === currentPhoto
+        ) {
+
+            dot.classList.add(
+                "active"
+            );
         }
 
-        dot.onclick = function () {
 
-            currentPhoto = i;
+        dot.onclick =
+            function () {
 
-            changePhoto();
-        };
+                currentPhoto = i;
 
-        dots.appendChild(dot);
+                changePhoto();
+            };
+
+
+        dots.appendChild(
+            dot
+        );
     }
 }
 
@@ -578,15 +763,21 @@ function createDots() {
 
 function updateDots() {
 
-    const dots = document.querySelectorAll(".dot");
-
-    dots.forEach(function (dot, index) {
-
-        dot.classList.toggle(
-            "active",
-            index === currentPhoto
+    const dots =
+        document.querySelectorAll(
+            ".dot"
         );
-    });
+
+
+    dots.forEach(
+        function (dot, index) {
+
+            dot.classList.toggle(
+                "active",
+                index === currentPhoto
+            );
+        }
+    );
 }
 
 
@@ -596,9 +787,16 @@ function updateDots() {
 
 function createFloatingHeart() {
 
-    const heart = document.createElement("div");
+    const heart =
+        document.createElement(
+            "div"
+        );
 
-    heart.classList.add("floating-heart");
+
+    heart.classList.add(
+        "floating-heart"
+    );
+
 
     const heartTypes = [
         "❤️",
@@ -608,24 +806,43 @@ function createFloatingHeart() {
         "💓"
     ];
 
-    heart.innerHTML =
-        heartTypes[Math.floor(Math.random() * heartTypes.length)];
 
-    heart.style.left = Math.random() * 100 + "vw";
+    heart.innerHTML =
+        heartTypes[
+            Math.floor(
+                Math.random() *
+                heartTypes.length
+            )
+        ];
+
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
 
     heart.style.fontSize =
-        (12 + Math.random() * 25) + "px";
+        (12 + Math.random() * 25)
+        + "px";
+
 
     heart.style.animationDuration =
-        (5 + Math.random() * 5) + "s";
+        (5 + Math.random() * 5)
+        + "s";
 
-    document.body.appendChild(heart);
 
-    setTimeout(function () {
+    document.body.appendChild(
+        heart
+    );
 
-        heart.remove();
 
-    }, 11000);
+    setTimeout(
+        function () {
+
+            heart.remove();
+
+        },
+        11000
+    );
 }
 
 
@@ -635,27 +852,48 @@ function createFloatingHeart() {
 
 function createBalloon() {
 
-    const balloon = document.createElement("div");
+    const balloon =
+        document.createElement(
+            "div"
+        );
 
-    balloon.classList.add("balloon");
 
-    balloon.innerHTML = "🎈";
+    balloon.classList.add(
+        "balloon"
+    );
 
-    balloon.style.left = Math.random() * 100 + "vw";
+
+    balloon.innerHTML =
+        "🎈";
+
+
+    balloon.style.left =
+        Math.random() * 100 + "vw";
+
 
     balloon.style.fontSize =
-        (40 + Math.random() * 30) + "px";
+        (40 + Math.random() * 30)
+        + "px";
+
 
     balloon.style.animationDuration =
-        (7 + Math.random() * 6) + "s";
+        (7 + Math.random() * 6)
+        + "s";
 
-    document.body.appendChild(balloon);
 
-    setTimeout(function () {
+    document.body.appendChild(
+        balloon
+    );
 
-        balloon.remove();
 
-    }, 15000);
+    setTimeout(
+        function () {
+
+            balloon.remove();
+
+        },
+        15000
+    );
 }
 
 
@@ -665,26 +903,47 @@ function createBalloon() {
 
 function createSparkle() {
 
-    const sparkle = document.createElement("div");
+    const sparkle =
+        document.createElement(
+            "div"
+        );
 
-    sparkle.classList.add("sparkle");
 
-    sparkle.innerHTML = "✦";
+    sparkle.classList.add(
+        "sparkle"
+    );
 
-    sparkle.style.left = Math.random() * 100 + "vw";
 
-    sparkle.style.top = Math.random() * 100 + "vh";
+    sparkle.innerHTML =
+        "✦";
+
+
+    sparkle.style.left =
+        Math.random() * 100 + "vw";
+
+
+    sparkle.style.top =
+        Math.random() * 100 + "vh";
+
 
     sparkle.style.fontSize =
-        (10 + Math.random() * 20) + "px";
+        (10 + Math.random() * 20)
+        + "px";
 
-    document.body.appendChild(sparkle);
 
-    setTimeout(function () {
+    document.body.appendChild(
+        sparkle
+    );
 
-        sparkle.remove();
 
-    }, 2000);
+    setTimeout(
+        function () {
+
+            sparkle.remove();
+
+        },
+        2000
+    );
 }
 
 
@@ -694,43 +953,96 @@ function createSparkle() {
 
 function startCelebration() {
 
+    /*
+       Prevent duplicate intervals.
+    */
+
     if (effectsStarted) {
         return;
     }
 
+
     effectsStarted = true;
 
-    // Floating hearts
 
-    setInterval(createFloatingHeart, 700);
+    /*
+       Floating hearts.
+    */
 
-    // Balloons
+    setInterval(
+        createFloatingHeart,
+        700
+    );
 
-    setInterval(createBalloon, 2600);
 
-    // Sparkles
+    /*
+       Balloons.
+    */
 
-    setInterval(createSparkle, 800);
+    setInterval(
+        createBalloon,
+        2600
+    );
 
-    // Initial balloons
 
-    for (let i = 0; i < 12; i++) {
+    /*
+       Sparkles.
+    */
 
-        setTimeout(createBalloon, i * 150);
+    setInterval(
+        createSparkle,
+        800
+    );
+
+
+    /*
+       Initial balloons.
+    */
+
+    for (
+        let i = 0;
+        i < 12;
+        i++
+    ) {
+
+        setTimeout(
+            createBalloon,
+            i * 150
+        );
     }
 
-    // Initial hearts
 
-    for (let i = 0; i < 25; i++) {
+    /*
+       Initial hearts.
+    */
 
-        setTimeout(createFloatingHeart, i * 80);
+    for (
+        let i = 0;
+        i < 25;
+        i++
+    ) {
+
+        setTimeout(
+            createFloatingHeart,
+            i * 80
+        );
     }
 
-    // Initial sparkles
 
-    for (let i = 0; i < 30; i++) {
+    /*
+       Initial sparkles.
+    */
 
-        setTimeout(createSparkle, i * 70);
+    for (
+        let i = 0;
+        i < 30;
+        i++
+    ) {
+
+        setTimeout(
+            createSparkle,
+            i * 70
+        );
     }
 }
 
@@ -739,38 +1051,54 @@ function startCelebration() {
    KEYBOARD CONTROLS
 ========================================== */
 
-document.addEventListener("keydown", function (event) {
+document.addEventListener(
+    "keydown",
+    function (event) {
 
-    // Left arrow = previous photo
 
-    if (
-        event.key === "ArrowLeft" &&
-        memories.classList.contains("active")
-    ) {
+        /*
+           Left arrow = previous photo
+        */
 
-        previousPhoto();
+        if (
+            event.key === "ArrowLeft" &&
+            memories.classList.contains(
+                "active"
+            )
+        ) {
+
+            previousPhoto();
+        }
+
+
+        /*
+           Right arrow = next photo
+        */
+
+        if (
+            event.key === "ArrowRight" &&
+            memories.classList.contains(
+                "active"
+            )
+        ) {
+
+            nextPhoto();
+        }
+
+
+        /*
+           Space = music
+        */
+
+        if (
+            event.code === "Space" &&
+            event.target.tagName !== "BUTTON"
+        ) {
+
+            event.preventDefault();
+
+            toggleMusic();
+        }
+
     }
-
-    // Right arrow = next photo
-
-    if (
-        event.key === "ArrowRight" &&
-        memories.classList.contains("active")
-    ) {
-
-        nextPhoto();
-    }
-
-    // Space = music
-
-    if (
-        event.code === "Space" &&
-        event.target.tagName !== "BUTTON"
-    ) {
-
-        event.preventDefault();
-
-        toggleMusic();
-    }
-
-});
+);
